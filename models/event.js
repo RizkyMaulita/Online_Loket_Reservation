@@ -33,11 +33,55 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Event name can't be null !`
+        },
+        notEmpty: {
+          msg: `Event name can't be empty !`
+        }
+      }
+    },
     description: DataTypes.TEXT,
-    start_date: DataTypes.DATE,
-    end_date: DataTypes.DATE,
-    location_id: DataTypes.UUID,
+    start_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Event start date can't be null !`
+        },
+        notEmpty: {
+          msg: `Event start date can't be empty !`
+        }
+      }
+    },
+    end_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Event end date can't be null !`
+        },
+        notEmpty: {
+          msg: `Event end date can't be empty !`
+        }
+      }
+    },
+    location_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Event location ID can't be null !`
+        },
+        notEmpty: {
+          msg: `Event location ID can't be empty !`
+        }
+      }
+    },
     status: DataTypes.ENUM('0','1','2'),
     create_by: DataTypes.STRING,
     create_date: DataTypes.DATE,

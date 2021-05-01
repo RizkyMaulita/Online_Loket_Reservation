@@ -25,8 +25,30 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    address: DataTypes.TEXT,
-    city: DataTypes.STRING,
+    address: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Location address can't be null !`
+        },
+        notEmpty: {
+          msg: `Location address can't be empty !`
+        }
+      }
+    },
+    city: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Location city can't be null !`
+        },
+        notEmpty: {
+          msg: `Location city can't be empty !`
+        }
+      }
+    },
     status: DataTypes.ENUM('0','1','2'),
     create_by: DataTypes.STRING,
     create_date: DataTypes.DATE,

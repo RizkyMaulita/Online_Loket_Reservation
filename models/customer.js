@@ -25,9 +25,45 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    name: DataTypes.STRING,
-    email: DataTypes.STRING,
-    no_handphone: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Customer name can't be null !`
+        },
+        notEmpty: {
+          msg: `Customer name can't be empty !`
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Customer email can't be null !`
+        },
+        notEmpty: {
+          msg: `Customer email can't be empty`
+        },
+        isEmail: {
+          msg: `Wrong email format !`
+        }
+      }
+    },
+    no_handphone: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull: {
+          msg: `Customer phone number can't be null !`
+        },
+        notEmpty: {
+          msg: `Customer phone number can't be empty !`
+        }
+      }
+    },
     status: DataTypes.ENUM('0','1','2'),
     create_by: DataTypes.STRING,
     create_date: DataTypes.DATE,
