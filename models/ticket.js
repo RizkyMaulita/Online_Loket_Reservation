@@ -11,10 +11,23 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Ticket.belongsTo(models.Event, {
+        foreignKey: 'event_id',
+        targetKey: 'event_id'
+      })
+      Ticket.hasMany(models.Transaction_Detail, {
+        sourceKey: 'ticket_id',
+        foreignKey: 'ticket_id'
+      })
     }
   };
   Ticket.init({
-    ticket_id: DataTypes.UUID,
+    ticket_id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+    },
+    event_id: DataTypes.UUID,
     type: DataTypes.STRING,
     price: DataTypes.INTEGER,
     quota: DataTypes.INTEGER,
@@ -25,7 +38,10 @@ module.exports = (sequelize, DataTypes) => {
     update_date: DataTypes.DATE
   }, {
     sequelize,
+    createdAt: false,
+    updatedAt: false,
     modelName: 'Ticket',
   });
+  Ticket.removeAttribute('id')
   return Ticket;
 };

@@ -11,10 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Customer.hasMany(models.Transaction, {
+        sourceKey: 'customer_id',
+        foreignKey: 'customer_id'
+      })
     }
   };
   Customer.init({
-    customer_id: DataTypes.UUID,
+    customer_id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+    },
     name: DataTypes.STRING,
     email: DataTypes.STRING,
     no_handphone: DataTypes.STRING,
@@ -25,7 +33,10 @@ module.exports = (sequelize, DataTypes) => {
     update_date: DataTypes.DATE
   }, {
     sequelize,
+    createdAt: false,
+    updatedAt: false,
     modelName: 'Customer',
   });
+  Customer.removeAttribute('id')
   return Customer;
 };

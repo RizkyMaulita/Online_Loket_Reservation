@@ -11,10 +11,26 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Event.belongsTo(models.Location, {
+        targetKey: 'location_id',
+        foreignKey: 'location_id'
+      })
+      Event.hasMany(models.Ticket, {
+        sourceKey: 'event_id',
+        foreignKey: 'event_id'
+      })
+      Event.hasMany(models.Transaction, {
+        sourceKey: 'event_id',
+        foreignKey: 'event_id'
+      })
     }
   };
   Event.init({
-    event_id: DataTypes.UUID,
+    event_id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+    },
     name: DataTypes.STRING,
     description: DataTypes.TEXT,
     start_date: DataTypes.DATE,
@@ -27,7 +43,10 @@ module.exports = (sequelize, DataTypes) => {
     update_date: DataTypes.DATE
   }, {
     sequelize,
+    createdAt: false,
+    updatedAt: false,
     modelName: 'Event',
   });
+  Event.removeAttribute('id')
   return Event;
 };
