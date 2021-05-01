@@ -6,7 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development nodemon app.js",
-    "start": "NODE_ENV=production node app.js"
+    "start": "NODE_ENV=production node app.js",
+    "db:create:dev": "NODE_ENV=development npx sequelize db:create",
+    "db:migrate:dev": "NODE_ENV=development npx sequelize db:migrate",
+    "db:migrate:undo:dev": "NODE_ENV=development npx sequelize db:migrate:undo:all",
+    "db:seed:dev": "NODE_ENV=development npx sequelize db:seed:all"
   },
   "repository": {
     "type": "git",
@@ -25,7 +29,9 @@
     "express": "^4.17.1",
     "pg": "^8.6.0",
     "sequelize": "^6.6.2",
-    "sequelize-cli": "^6.2.0",
     "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.2.0"
   }
 }
