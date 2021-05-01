@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   Location.init({
     location_id: {
-      allowNull: false,
+      // allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
     },
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Location address can't be null !`
         },
         notEmpty: {
@@ -41,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Location city can't be null !`
         },
         notEmpty: {
