@@ -7,6 +7,9 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.UUID
       },
+      event_id: {
+        type: Sequelize.UUID
+      },
       type: {
         type: Sequelize.STRING
       },

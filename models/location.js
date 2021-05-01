@@ -11,10 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Location.hasMany(models.Event, {
+        sourceKey: 'location_id',
+        foreignKey: 'location_id'
+      })
     }
   };
   Location.init({
-    location_id: DataTypes.UUID,
+    location_id: {
+      allowNull: false,
+      primaryKey: true,
+      type: DataTypes.UUID,
+    },
     address: DataTypes.TEXT,
     city: DataTypes.STRING,
     status: DataTypes.ENUM,
@@ -24,7 +32,10 @@ module.exports = (sequelize, DataTypes) => {
     update_date: DataTypes.DATE
   }, {
     sequelize,
+    createdAt: false,
+    updatedAt: false,
     modelName: 'Location',
   });
+  Location.removeAttribute('id')
   return Location;
 };
