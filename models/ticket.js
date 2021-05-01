@@ -29,10 +29,58 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
       type: DataTypes.UUID,
     },
-    event_id: DataTypes.UUID,
-    type: DataTypes.STRING,
-    price: DataTypes.INTEGER,
-    quota: DataTypes.INTEGER,
+    event_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Event ID for ticket can't be null !`
+        },
+        notEmpty: {
+          msg: `Event ID for ticket can't be empty !`
+        }
+      }
+    },
+    type: {
+      type: DataTypes.ENUM('Reguler','Silver','Gold','Platinum','VIP', 'VVIP'),
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Ticket's type can't be null !`
+        },
+        notEmpty: {
+          msg: `Ticket's type can't be empty !`
+        }
+      }
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Ticket's price can't be null !`
+        },
+        notEmpty: {
+          msg: `Ticket's price can't be empty !`
+        }
+      }
+    },
+    quota: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNull: {
+          msg: `Ticket's quota can't be null !`
+        },
+        notEmpty: {
+          msg: `Ticket's quota can't be empty !`
+        },
+        min: {
+          args: 0,
+          msg: `Ticket's quota sold out !`
+        }
+      }
+    },
     status: DataTypes.ENUM('0','1','2'),
     create_by: DataTypes.STRING,
     create_date: DataTypes.DATE,

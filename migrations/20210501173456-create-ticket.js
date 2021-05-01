@@ -11,7 +11,7 @@ module.exports = {
         type: Sequelize.UUID
       },
       type: {
-        type: Sequelize.STRING
+        type: Sequelize.ENUM('Reguler','Silver','Gold','Platinum','VIP', 'VVIP')
       },
       price: {
         type: Sequelize.INTEGER
