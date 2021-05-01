@@ -33,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Event ID for ticket can't be null !`
         },
         notEmpty: {
@@ -45,7 +45,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('Reguler','Silver','Gold','Platinum','VIP', 'VVIP'),
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Ticket's type can't be null !`
         },
         notEmpty: {
@@ -57,7 +57,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Ticket's price can't be null !`
         },
         notEmpty: {
@@ -69,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Ticket's quota can't be null !`
         },
         notEmpty: {

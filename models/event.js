@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Event name can't be null !`
         },
         notEmpty: {
@@ -50,7 +50,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Event start date can't be null !`
         },
         notEmpty: {
@@ -62,7 +62,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Event end date can't be null !`
         },
         notEmpty: {
@@ -74,7 +74,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
       validate: {
-        isNull: {
+        notNull: {
           msg: `Event location ID can't be null !`
         },
         notEmpty: {
