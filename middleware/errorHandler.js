@@ -1,4 +1,5 @@
 module.exports = (err, req, res, next) => {
+  console.log(err, '<<< error')
   if(err.name === 'Validation Error') {
     const messages = err.message.map((e) => ({ message: e.message }))
     res.status(err.status).json({ messages })

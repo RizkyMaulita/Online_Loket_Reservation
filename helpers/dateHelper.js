@@ -5,6 +5,18 @@ const getCurrentDate = () => {
   return dateUTC
 }
 
+const dateComparisonFromNow = (operator = '<', endDate = new Date()) => {
+  let flag = false
+  const endDateUTC = new Date(endDate.getTime() - endDate.getTimezoneOffset() * 60000)
+  switch (operator) {
+    case '>': flag = getCurrentDate() > endDateUTC ; break
+    default : flag = getCurrentDate() < endDateUTC
+  }
+  if (flag) return true
+  return false
+}
+
 module.exports = {
-  getCurrentDate
+  getCurrentDate,
+  dateComparisonFromNow
 }
