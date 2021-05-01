@@ -21,7 +21,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   Customer.init({
     customer_id: {
-      allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
     },

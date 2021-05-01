@@ -16,7 +16,7 @@ module.exports = async (req, res, next) => {
       }
       const createNewLocation = await Location.create(payload)
       if (createNewLocation) {
-        res.status(200).json({
+        res.status(201).json({
           message: `Successfully create new location !`,
           data: {
             createNewLocation

@@ -29,7 +29,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   Event.init({
     event_id: {
-      allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
     },

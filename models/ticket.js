@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   Ticket.init({
     ticket_id: {
-      allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
     },
