@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const { v4: uuidV4 } = require('uuid');
+const { getCurrentDate } = require('../helpers');
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
     /**
@@ -35,12 +37,22 @@ module.exports = (sequelize, DataTypes) => {
     customer_id: DataTypes.UUID,
     total_price: DataTypes.INTEGER,
     total_ticket: DataTypes.INTEGER,
-    status: DataTypes.ENUM,
+    status: DataTypes.ENUM('0','1','2'),
     create_by: DataTypes.STRING,
     create_date: DataTypes.DATE,
     update_by: DataTypes.STRING,
     update_date: DataTypes.DATE
   }, {
+    hooks: {
+      beforeCreate (instance) {
+        instance.transaction_id = uuidV4()
+        instance.status = '1'
+        instance.create_date = getCurrentDate()
+        if (!instance.create_by) {
+          instance.create_by = 'admin'
+        }
+      }
+    },
     sequelize,
     createdAt: false,
     updatedAt: false,
