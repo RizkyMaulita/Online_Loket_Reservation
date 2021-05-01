@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
   };
   Transaction_Detail.init({
     transaction_detail_id: {
-      allowNull: false,
       primaryKey: true,
       type: DataTypes.UUID,
     },
