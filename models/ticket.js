@@ -75,7 +75,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: `Ticket's quota can't be empty !`
         },
         min: {
-          args: 0,
+          args: [0],
           msg: `Ticket's quota sold out !`
         }
       }

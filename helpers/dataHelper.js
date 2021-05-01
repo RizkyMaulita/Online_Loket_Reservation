@@ -7,6 +7,13 @@ const detailStatus = (status) => {
   return 'created'
 }
 
+const checkTypeTicket = (typeTicket) => {
+  const types = ['Reguler','Silver','Gold','Platinum','VIP', 'VVIP']
+  const checkType = types.find(type => type.toLowerCase() === typeTicket.toLowerCase())
+  return checkType
+}
+
 module.exports = {
-  detailStatus
+  detailStatus,
+  checkTypeTicket
 }
