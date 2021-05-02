@@ -65,7 +65,7 @@ module.exports = async (req, res, next) => {
           const updateLoctAndCreateEvent = await Promise.all(arrPromises)
           if (updateLoctAndCreateEvent) {
             const createEvent = updateLoctAndCreateEvent[0]
-            const updateLocation = updateLoctAndCreateEvent[1]
+            const updateLocation = updateLoctAndCreateEvent[1][1][0]
             if (createEvent && updateLocation) {
               res.status(201).json({
                 message: `Successfully create new event and update data location !`,
@@ -83,7 +83,8 @@ module.exports = async (req, res, next) => {
                     city: updateLocation.city,
                     status: detailStatus(updateLocation.status)
                   }
-                }
+                },
+                updateLocation
               })
             } else if (createEvent) {
               res.status(400).json({
@@ -95,12 +96,6 @@ module.exports = async (req, res, next) => {
                     description: createEvent.description,
                     start_date: createEvent.start_date,
                     end_date: createEvent.end_date
-                  },
-                  location: {
-                    location_id,
-                    address: updateLocation.address,
-                    city: updateLocation.city,
-                    status: detailStatus(updateLocation.status)
                   }
                 }
               })
