@@ -64,15 +64,15 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    price: {
+    total_price: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {
         notNull: {
-          msg: `Price in Transaction Detail can't be null !`
+          msg: `Total Price in Transaction Detail can't be null !`
         },
         notEmpty: {
-          msg: `Price in Transaction Detail can't be empty !`
+          msg: `Total Price in Transaction Detail can't be empty !`
         }
       }
     },
