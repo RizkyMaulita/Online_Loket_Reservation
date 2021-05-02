@@ -16,7 +16,13 @@ const dateComparisonFromNow = (operator = '<', endDate = new Date()) => {
   return false
 }
 
+const convertDateToString = (dateString) => {
+  const date = new Date(dateString)
+  return date.toUTCString()
+}
+
 module.exports = {
   getCurrentDate,
-  dateComparisonFromNow
+  dateComparisonFromNow,
+  convertDateToString
 }

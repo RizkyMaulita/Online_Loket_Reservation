@@ -84,7 +84,7 @@ module.exports = async (req, res, next) => {
                   },
                   attributes: ['ticket_id', 'type', 'price', 'quota']
                 })
-                if (findDataTicket && findDataTicket) {
+                if (findDataTicket && findDataTicket.length) {
                   const requestTicket = {}
                   data_ticket.forEach(ticket => {
                     if (!requestTicket[ticket.type]) {
