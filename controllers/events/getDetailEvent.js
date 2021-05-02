@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
       where: {
         event_id
       },
-      attributes: ['event_id', 'name', 'start_date', 'end_date', 'status'],
+      attributes: ['event_id', 'name', 'description', 'start_date', 'end_date', 'status'],
       include: [
         {
           model: Location,
@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
       ]
     })
     if (findData) {
-      const { event_id, name, start_date, end_date, status, Location, Tickets } = findData
+      const { event_id, name, description, start_date, end_date, status, Location, Tickets } = findData
       const { location_id, address, city, status: location_status } = Location
       Tickets.forEach(ticket => {
         ticket.status = detailStatus(ticket.status)
@@ -30,6 +30,7 @@ module.exports = async (req, res, next) => {
       const result = {
         event_id,
         name,
+        description,
         start_date: convertDateToString(start_date),
         end_date: convertDateToString(end_date),
         status: detailStatus(status),
