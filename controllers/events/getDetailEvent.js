@@ -12,10 +12,7 @@ module.exports = async (req, res, next) => {
       include: [
         {
           model: Location,
-          where: {
-            status: '1'
-          },
-          attributes: ['location_id', 'address', 'city']
+          attributes: ['location_id', 'address', 'city', 'status']
         }, 
         {
           model: Ticket,
@@ -27,7 +24,16 @@ module.exports = async (req, res, next) => {
       ]
     })
     if (findData) {
-      res.status(200).json(findData)
+      if (findData.Location) {
+        if (findData.Location === '1') {
+          res.status(200).json(findData)
+        } else {
+          throw {
+            status: 400,
+            message: `Data Location for this event has been deactivated ! Please change 'status' in data 'Locations' to '1' if want to activate this !`
+          }
+        }
+      }
     } else throw {
       status: 404,
       message: `Data Event Not Found !`

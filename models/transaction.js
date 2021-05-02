@@ -88,7 +88,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate (instance) {
-        instance.transaction_id = uuidV4()
+        if (!instance.transaction_id) {
+          instance.transaction_id = uuidV4()
+        }
         instance.status = '1'
         instance.create_date = getCurrentDate()
         if (!instance.create_by) {
