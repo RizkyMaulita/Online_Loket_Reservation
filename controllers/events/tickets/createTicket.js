@@ -78,7 +78,7 @@ module.exports = async (req, res, next) => {
             ]
             const updateEventAndCreateTicket = await Promise.all(arrPromises)
             if (updateEventAndCreateTicket) {
-              const updateEvent = updateEventAndCreateTicket[1]
+              const updateEvent = updateEventAndCreateTicket[1][1][0]
               const createTicket = updateEventAndCreateTicket[0]
               if (createTicket && updateEvent) {
                 res.status(201).json({
@@ -110,13 +110,6 @@ module.exports = async (req, res, next) => {
                       type: createTicket.type,
                       price: createTicket.price,
                       quota: createTicket.quota
-                    },
-                    event: {
-                      event_id,
-                      name: updateEvent.name,
-                      start_date: updateEvent.start_date,
-                      end_date: updateEvent.end_date,
-                      status: detailStatus(updateEvent.status)
                     }
                   }
                 })
@@ -135,6 +128,12 @@ module.exports = async (req, res, next) => {
       }
     }
   } catch (err) {
-    next(err)
+    if (err.name === 'SequelizeValidationError') {
+      next({
+        name: 'Validation Error',
+        status: 400,
+        message: err.errors
+      })
+    } else next (err)  
   }
 }

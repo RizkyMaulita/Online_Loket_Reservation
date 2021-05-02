@@ -208,7 +208,12 @@ module.exports = async (req, res, next) => {
         status: 400,
         message: `Failed to create data transaction !`
       })
-    }
-    next(err)
+    } else if (err.name === 'SequelizeValidationError') {
+      next({
+        name: 'Validation Error',
+        status: 400,
+        message: err.errors
+      })
+    } else next (err)
   }
 }
