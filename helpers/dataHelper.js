@@ -2,7 +2,7 @@ const detailStatus = (status) => {
   switch (status) {
     case '0' : return 'deleted'
     case '1' : return 'created'
-    case '2' : return 'blocked'
+    case '2' : return 'suspend'
   }
   return 'created'
 }

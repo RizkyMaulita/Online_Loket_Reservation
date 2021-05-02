@@ -1,14 +1,14 @@
 const { Event, Ticket, Location } = require('../../models')
+const { detailStatus, convertRupiah, convertDateToString } = require('../../helpers')
 
 module.exports = async (req, res, next) => {
   try {
     const { event_id } = req.params
     const findData = await Event.findOne({
       where: {
-        event_id,
-        status: '1'
+        event_id
       },
-      attributes: ['event_id', 'name', 'start_date', 'end_date'],
+      attributes: ['event_id', 'name', 'start_date', 'end_date', 'status'],
       include: [
         {
           model: Location,
@@ -16,24 +16,32 @@ module.exports = async (req, res, next) => {
         }, 
         {
           model: Ticket,
-          where: {
-            status: '1'
-          },
-          attributes: ['ticket_id', 'type', 'price', 'quota']
+          attributes: ['ticket_id', 'type', 'price', 'quota', 'status']
         }
       ]
     })
     if (findData) {
-      if (findData.Location) {
-        if (findData.Location === '1') {
-          res.status(200).json(findData)
-        } else {
-          throw {
-            status: 400,
-            message: `Data Location for this event has been deactivated ! Please change 'status' in data 'Locations' to '1' if want to activate this !`
-          }
-        }
+      const { event_id, name, start_date, end_date, status, Location, Tickets } = findData
+      const { location_id, address, city, status: location_status } = Location
+      Tickets.forEach(ticket => {
+        ticket.status = detailStatus(ticket.status)
+        ticket.price = convertRupiah(ticket.price)
+      })
+      const result = {
+        event_id,
+        name,
+        start_date: convertDateToString(start_date),
+        end_date: convertDateToString(end_date),
+        status: detailStatus(status),
+        Location: {
+          location_id,
+          address,
+          city,
+          status: detailStatus(location_status)
+        },
+        Tickets
       }
+      res.status(200).json(result)
     } else throw {
       status: 404,
       message: `Data Event Not Found !`
