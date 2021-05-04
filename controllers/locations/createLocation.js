@@ -18,9 +18,7 @@ module.exports = async (req, res, next) => {
       if (createNewLocation) {
         res.status(201).json({
           message: `Successfully create new location !`,
-          data: {
-            createNewLocation
-          }
+          data: createNewLocation
         })
       } else throw {
         status: 400,
