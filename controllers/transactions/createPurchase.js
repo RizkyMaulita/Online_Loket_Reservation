@@ -49,7 +49,7 @@ module.exports = async (req, res, next) => {
             if (checkEvent.Location.status !== '1') {
               throw {
                 status: 400,
-                message: `Data Location for this event has been deactivated ! Please change 'status' in data 'Locations' to '1' if want to activate this !`
+                message: `Sorry, location for this event has not available ! Please change 'status' in data 'Locations' to '1' if location event is avalaible !`
               }
             } else {
               let customer_id = ''
