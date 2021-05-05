@@ -4,6 +4,10 @@
 > - This app running on Node.js and postgres, so make sure your local have installed Node.js (min. v12) and postgres v13. Or you can run this command 
 ``` psql --version ``` and  
 ``` node --version ```
+> - This app use nodemon, so make sure your local have installed that. if not, you can run this command to install that
+```
+npm i -g nodemon
+```
 > - You can see schema database for this app in folder assets
 #
 ## STEP Installation
