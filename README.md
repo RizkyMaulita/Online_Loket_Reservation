@@ -351,13 +351,7 @@ npm run dev
       "quota": integer,
       "status": string
     },
-    {
-      "ticket_id": uuid,
-      "type": string,
-      "price": string,
-      "quota": integer,
-      "status": string
-    }
+    ...
   ]
 }
 ```
@@ -549,7 +543,8 @@ npm run dev
         "quota": integer,
         "status": string
       }
-    }
+    },
+    ...
   ]
 }
 ```
